@@ -3,6 +3,11 @@ html {
     font-family: monospace;
 }
 
+.name {
+    color: white;
+    width: 400%;
+    height: fit-content;
+}
 #calc {
     display: flex;
     min-height: 95vh;
