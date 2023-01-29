@@ -3,12 +3,16 @@ html {
     font-family: monospace;
 }
 
-.name {
-    color: white;
-    width: 400%;
-    height: fit-content;
+#name {
+    position: absolute;
+    color: #888;
+    top: -0.7rem;
+    text-align: left;
+    padding-left: 1rem;
+    width: 100%;
 }
 #calc {
+    
     display: flex;
     min-height: 95vh;
     justify-content: center;
@@ -21,6 +25,7 @@ html {
 
 #container {
     background-color: black;
+    position: relative;
     border: 10px solid rgba(47,47,47,1);
     border-radius: 4px;
     display: grid;
