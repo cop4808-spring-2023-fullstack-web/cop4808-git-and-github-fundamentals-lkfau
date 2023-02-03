@@ -3,14 +3,22 @@ html {
     font-family: monospace;
 }
 
+body {
+    overflow: hidden;
+    margin: 0;
+    
+
+}
+
 #name {
     position: absolute;
     color: #888;
     top: -0.7rem;
+    left: 1rem;
     text-align: left;
-    padding-left: 1rem;
     width: 100%;
 }
+
 #calc {
     
     display: flex;
@@ -30,7 +38,7 @@ html {
     border-radius: 4px;
     display: grid;
     grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(100px, auto) repeat(5, 80px);
+    grid-template-rows: minmax(auto, auto) repeat(6, 80px);
     gap: 2px;
 }
 
@@ -58,11 +66,17 @@ button {
     color: black;
 }
 
-
 #zero {
     grid-column: span 2;
 }
 
+.newrow {
+    background-color: yellow;
+}
+
+.newrow:active {
+    background-color: #fdfa4a;
+}
 .operator {
     background-color: #FF8F1F;    
 }
