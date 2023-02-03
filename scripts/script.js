@@ -1,16 +1,28 @@
+// displayed on screen
 let displayValue = '0';
+
+// operands/operators saved for performing calculations
 let firstOperand = null;
 let secondOperand = null;
 let firstOperator = null;
 let secondOperator = null;
 let result = null;
+
+// returns all buttons in html file
 const buttons = document.querySelectorAll('button');
 
+// key listener for data-key codes to use calculator with the keyboard
 window.addEventListener('keydown', function(e){
-    const key = document.querySelector(`button[data-key='${e.keyCode}']`);
-    key.click();
+    if (e.key == 'Backspace') {
+        inputBackspace();
+    } else {
+        const key = document.querySelector(`button[data-key='${e.code}']`);
+        key.click();
+    }
+    
 });
 
+// updates display to be equal to displayValue, ensures maximum digit length of 10
 function updateDisplay() {
     const display = document.getElementById('display');
     display.innerText = displayValue;
@@ -20,6 +32,9 @@ function updateDisplay() {
 }
   
 updateDisplay();
+
+// handler for button clicks, adds event handler for each button
+// decides which function to execute based on button class
 
 function clickButton() {
     for(let i = 0; i < buttons.length; i++) {
@@ -60,19 +75,20 @@ function clickButton() {
 
 clickButton();
 
+// adds operand to current calculation
 function inputOperand(operand) {
     if(firstOperator === null) {
         if(displayValue === '0' || displayValue === 0) {
-            //1st click - handles first operand input
+            // 1st click - handles first operand input
             displayValue = operand;
         } else if(displayValue === firstOperand) {
-            //starts new operation after inputEquals()
+            // starts new operation after inputEquals()
             displayValue = operand;
         } else {
             displayValue += operand;
         }
     } else {
-        //3rd/5th click - inputs to secondOperand
+        // 3rd/5th click - inputs to secondOperand
         if(displayValue === firstOperand) {
             displayValue = operand;
         } else {
@@ -81,6 +97,7 @@ function inputOperand(operand) {
     }
 }
 
+// adds operator to current calculation
 function inputOperator(operator) {
     if(firstOperator != null && secondOperator === null) {
         //4th click - handles input of second operator
@@ -105,12 +122,13 @@ function inputOperator(operator) {
     }
 }
 
+// handler for equals button
 function inputEquals() {
-    //hitting equals doesn't display undefined before operate()
+    // hitting equals doesn't display undefined before operate()
     if(firstOperator === null) {
         displayValue = displayValue;
     } else if(secondOperator != null) {
-        //handles final result
+        // handles final result
         secondOperand = displayValue;
         result = operate(Number(firstOperand), Number(secondOperand), secondOperator);
         if(result === 'lmao') {
@@ -124,7 +142,7 @@ function inputEquals() {
             result = null;
         }
     } else {
-        //handles first operation
+        // handles first operation
         secondOperand = displayValue;
         result = operate(Number(firstOperand), Number(secondOperand), firstOperator);
         if(result === 'lmao') {
@@ -140,6 +158,7 @@ function inputEquals() {
     }
 }
 
+// handles decimal input
 function inputDecimal(dot) {
     if(displayValue === firstOperand || displayValue === secondOperand) {
         displayValue = '0';
@@ -149,27 +168,33 @@ function inputDecimal(dot) {
     } 
 }
 
-function inputPercent(num) {
+// handles percent operator
+function inputPercent(num) { 
     displayValue = (num/100).toString();
 }
 
-function inputSign(num) {
+// handles sign operator
+function inputSign(num) { 
     displayValue = (num * -1).toString();
 }
 
-function inputSqrt(num) {
+// handles square root operator
+function inputSqrt(num) { 
     displayValue = (Math.pow(num, 0.5)).toString();
 }
 
+// handles pi operand
 function inputPi(num) {
     displayValue = Math.PI.toString();
 }
 
-function inputE(num) {
+// handles e operand
+function inputE(num) { 
     displayValue = Math.E.toString();
 }
 
-function clearDisplay() {
+// sets display back to 0, removes all operands & operators
+function clearDisplay() { 
     displayValue = '0';
     firstOperand = null;
     secondOperand = null;
@@ -178,6 +203,7 @@ function clearDisplay() {
     result = null;
 }
 
+// handles backspace (removes first operand from current calculation)
 function inputBackspace() {
     if(firstOperand != null) {
         firstOperand = null;
@@ -185,6 +211,7 @@ function inputBackspace() {
     }
 }
 
+// handles binary operations
 function operate(x, y, op) {
     if(op === '+') {
         return x + y;
@@ -199,11 +226,11 @@ function operate(x, y, op) {
         return x / y;
         }
     } else if (op === '^') {
-        console.log(Math.pow(x, y))
         return Math.pow(x, y);
     }
 }
 
+// rounds large/small numbers using scientific notation if necessary
 function roundAccurately(num, places) {
     return parseFloat(Math.round(num + 'e' + places) + 'e-' + places);
 }
