@@ -4,10 +4,7 @@ html {
 }
 
 body {
-    overflow: hidden;
     margin: 0;
-    
-
 }
 
 #name {
@@ -20,14 +17,13 @@ body {
 }
 
 #calc {
-    
     display: flex;
     min-height: 95vh;
     justify-content: center;
     align-content: center;
     align-items: center;
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;
     background-color: azure;
 }
 
@@ -71,11 +67,11 @@ button {
 }
 
 .newrow {
-    background-color: yellow;
+    background-color: rgb(237, 227, 39) !important;
 }
 
-.newrow:active {
-    background-color: #fdfa4a;
+.newrow:active, .newrow.operator:focus {
+    background-color: #fcff32 !important;
 }
 .operator {
     background-color: #FF8F1F;    

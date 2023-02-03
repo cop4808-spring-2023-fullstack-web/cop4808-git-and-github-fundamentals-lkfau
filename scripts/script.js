@@ -41,9 +41,19 @@ function clickButton() {
             } else if(buttons[i].classList.contains('sign')) {
                 inputSign(displayValue);
                 updateDisplay();
+            } else if(buttons[i].classList.contains('sqrt')) {
+                inputSqrt(displayValue);
+                updateDisplay();
+            } else if (buttons[i].classList.contains('pi')) {
+                inputPi(displayValue);
+                updateDisplay;
+            } else if (buttons[i].classList.contains('e')) {
+                inputE(displayValue);
+                updateDisplay();
             } else if(buttons[i].classList.contains('clear'))
                 clearDisplay();
                 updateDisplay();
+        
         }
     )}
 }
@@ -80,7 +90,7 @@ function inputOperator(operator) {
         displayValue = roundAccurately(result, 15).toString();
         firstOperand = displayValue;
         result = null;
-    } else if(firstOperator != null && secondOperator != null) {
+    } else if (firstOperator != null && secondOperator != null) {
         //6th click - new secondOperator
         secondOperand = displayValue;
         result = operate(Number(firstOperand), Number(secondOperand), secondOperator);
@@ -147,6 +157,18 @@ function inputSign(num) {
     displayValue = (num * -1).toString();
 }
 
+function inputSqrt(num) {
+    displayValue = (Math.pow(num, 0.5)).toString();
+}
+
+function inputPi(num) {
+    displayValue = Math.PI.toString();
+}
+
+function inputE(num) {
+    displayValue = Math.E.toString();
+}
+
 function clearDisplay() {
     displayValue = '0';
     firstOperand = null;
@@ -176,6 +198,9 @@ function operate(x, y, op) {
         } else {
         return x / y;
         }
+    } else if (op === '^') {
+        console.log(Math.pow(x, y))
+        return Math.pow(x, y);
     }
 }
 
